@@ -86,8 +86,20 @@ public class MyLinkedList<E> implements List<E> {
 	@Override
 	public void add(int index, E element) {
 		// TODO: fill this in
+		if(index < 0 || index > size) throw new IndexOutOfBoundsException();
+		if(index == 0){
+			Node node = head;
+			head = new Node(element);
+			head.next = node;
+		} else{
+			Node node = getNode(index-1);
+			Node temp = node.next;
+			Node x  = new Node(element);
+			node.next = x;
+			x.next = temp;
+		}
+		size++;
 	}
-
 	@Override
 	public boolean addAll(Collection<? extends E> collection) {
 		boolean flag = true;
@@ -147,6 +159,18 @@ public class MyLinkedList<E> implements List<E> {
 	@Override
 	public int indexOf(Object target) {
 		// TODO: fill this in
+		int index = 0;
+		if (target == null){
+			for(Node x = head; x != null; x = x.next){
+				if(x.cargo == null) return index;
+				index++;
+			}
+		} else{
+			for(Node x = head; x != null; x = x.next){
+				if(equals(x.cargo, target)) return index;
+				index++;
+			}
+		}
 		return -1;
 	}
 
@@ -202,6 +226,26 @@ public class MyLinkedList<E> implements List<E> {
 	@Override
 	public boolean remove(Object obj) {
 		// TODO: fill this in
+		if(equals(obj,head.cargo)){
+			head = head.next;
+			size--;
+			return true;
+		}
+		else if(obj == null){
+			return false;
+		} else{
+			Node node = head;
+			while(node.next!=null){
+				if (equals(node.next.cargo,obj)) {
+					//remove
+					node.next = node.next.next;
+					size--;
+					return true;
+				}
+				node = node.next;
+				
+			}
+		}		
 		return false;
 	}
 

@@ -34,7 +34,7 @@ public class MyLinkedListTest {
 		list.add(1);
 		list.add(2);
 		list.add(3);
-		
+				
 		mll = new MyLinkedList<Integer>();
 		mll.addAll(list);
 	}
@@ -65,7 +65,6 @@ public class MyLinkedListTest {
 	@Test
 	public void testAddIntT() {
 		mll.add(1, 5);
-		//System.out.println(Arrays.toString(mal.toArray()));
 		assertThat(mll.get(1), is(new Integer(5)));
 		assertThat(mll.size(), is(4));
 		
